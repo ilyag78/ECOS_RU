@@ -1,0 +1,39 @@
+# Временные файлы
+*.tmp
+*.temp
+*~
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE файлы
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Логи
+*.log
+logs/
+
+# Копии файлов (уже есть в проекте)
+* — копия*
+* — копия 2*
+
+# Секретные данные (если будут добавлены)
+.env
+config.json
+secrets.txt
+
+# Кэш
+.cache/
+node_modules/
+npm-debug.log*
+
+# Архивы
+*.zip
+*.rar
+*.7z
+*.tar.gz
