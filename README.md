@@ -53,17 +53,17 @@ ECOS_RU/
 
 **Яндекс.Директ:**
 ```
-https://ecos.am/?utm_source=yandex&utm_medium=cpc&utm_campaign=mining_infrastructure&utm_term=it_инфраструктура&utm_content=banner_1
+https://ecs-arm.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=mining_infrastructure&utm_term=it_инфраструктура&utm_content=banner_1
 ```
 
 **Google Ads:**
 ```
-https://ecos.am/?utm_source=google&utm_medium=cpc&utm_campaign=bitcoin_mining&utm_term=bitcoin_mining&utm_content=text_ad_1
+https://ecs-arm.ru/?utm_source=google&utm_medium=cpc&utm_campaign=bitcoin_mining&utm_term=bitcoin_mining&utm_content=text_ad_1
 ```
 
 **VK:**
 ```
-https://ecos.am/?utm_source=vk&utm_medium=social&utm_campaign=mining_2024&utm_content=post_1
+https://ecs-arm.ru/?utm_source=vk&utm_medium=social&utm_campaign=mining_2024&utm_content=post_1
 ```
 
 ## 🔧 Настройка
@@ -131,7 +131,7 @@ sendYandexEvent('test_event', {param: 'value'});
 
 ## 📞 Контакты
 
-- **Сайт:** https://ecos.am
+- **Сайт:** https://ecs-arm.ru
 - **Telegram:** @ecos_support
 - **Адрес:** С010, В. Саргсяна, 26/1, Ереван, Республика Армения
 
