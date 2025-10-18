@@ -110,6 +110,118 @@
             background: var(--accent-hover);
             transform: translateY(-1px);
         }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--primary-color);
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+        }
+
+        .mobile-menu-btn:hover {
+            color: var(--accent-color);
+        }
+
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .mobile-menu-overlay.active {
+            display: block;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 320px;
+            height: 100vh;
+            background: var(--bg-primary);
+            box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: var(--primary-color);
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .mobile-menu-links {
+            list-style: none;
+            padding: 20px 0;
+        }
+
+        .mobile-menu-links li {
+            margin: 0;
+        }
+
+        .mobile-menu-links a {
+            display: block;
+            padding: 16px 24px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .mobile-menu-links a:hover {
+            background: var(--bg-secondary);
+            border-left-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .mobile-menu-cta {
+            margin: 20px;
+            display: block;
+            text-align: center;
+            background: var(--accent-color);
+            color: white;
+            padding: 14px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-cta:hover {
+            background: var(--accent-hover);
+        }
         
         .hero {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
@@ -177,6 +289,70 @@
             font-size: 0.9rem;
             opacity: 0.8;
             font-weight: 500;
+        }
+
+        /* Urgency Elements - Soft version */
+        .urgency-banner {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(99, 102, 241, 0.08));
+            color: var(--text-primary);
+            padding: 16px 24px;
+            border-radius: 12px;
+            margin: 32px auto;
+            max-width: 600px;
+            text-align: center;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .urgency-banner-icon {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            opacity: 0.7;
+        }
+
+        .urgency-banner-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--accent-color);
+        }
+
+        .urgency-banner-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .urgency-badge {
+            display: inline-block;
+            background: rgba(59, 130, 246, 0.08);
+            color: var(--accent-color);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            margin-bottom: 16px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .urgency-badge i {
+            margin-right: 6px;
+        }
+
+        .spots-remaining {
+            display: inline-block;
+            background: rgba(59, 130, 246, 0.08);
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            margin-top: 12px;
+            font-size: 0.95rem;
+        }
+
+        .spots-number {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--accent-color);
         }
         
         .cta-button {
@@ -920,6 +1096,14 @@
                 display: none;
             }
 
+            .nav-cta {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
             .hero-stats {
                 gap: 24px;
             }
@@ -997,8 +1181,32 @@
                 <li><a href="#contact">Контакты</a></li>
             </ul>
             <a href="#consultation" class="nav-cta">Консультация</a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Открыть меню">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <span class="logo">ECOS</span>
+            <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Закрыть меню">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <ul class="mobile-menu-links">
+            <li><a href="#about" class="mobile-menu-link">О нас</a></li>
+            <li><a href="#products" class="mobile-menu-link">Продукты</a></li>
+            <li><a href="#advantages" class="mobile-menu-link">Преимущества</a></li>
+            <li><a href="#testimonials" class="mobile-menu-link">Отзывы</a></li>
+            <li><a href="#contact" class="mobile-menu-link">Контакты</a></li>
+        </ul>
+        <a href="#consultation" class="mobile-menu-cta">Получить консультацию</a>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -1020,6 +1228,13 @@
                         <span class="hero-stat-number">$115K</span>
                         <span class="hero-stat-label">курс BTC</span>
                     </div>
+                </div>
+
+                <!-- Urgency Banner -->
+                <div class="urgency-banner">
+                    <div class="urgency-banner-icon">ℹ️</div>
+                    <div class="urgency-banner-title">Количество мест ограничено</div>
+                    <div class="urgency-banner-text">На нашей ферме в СЭЗ Армении доступно ограниченное количество мест для размещения оборудования</div>
                 </div>
 
                 <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
@@ -1061,12 +1276,6 @@
                     <p>Необходимость круглосуточного мониторинга оборудования, быстрого реагирования на поломки и оптимизации настроек.</p>
                 </div>
             </div>
-            <div style="text-align: center; margin-top: 48px;">
-                <a href="#consultation" class="cta-button">
-                    <i class="fas fa-shield-alt"></i>
-                    Получить предложение с командой ECOS
-                </a>
-            </div>
         </div>
     </section>
 
@@ -1103,12 +1312,6 @@
                     <p>Полный цикл управления вашим майнингом прямо с мобильного телефона. Мониторинг доходности, статистика работы оборудования и управление настройками в удобном приложении.</p>
                 </div>
             </div>
-            <div style="text-align: center; margin-top: 48px;">
-                <a href="#consultation" class="cta-button">
-                    <i class="fas fa-play"></i>
-                    Получить предложение с командой ECOS
-                </a>
-            </div>
         </div>
     </section>
 
@@ -1140,12 +1343,6 @@
                     <h4>Полный сервис</h4>
                     <p>От покупки оборудования до стабильного сервиса - мы делаем все</p>
                 </div>
-            </div>
-            <div style="text-align: center; margin-top: 48px;">
-                <a href="#consultation" class="cta-button">
-                    <i class="fas fa-user-tie"></i>
-                    Записаться на консультацию с экспертом
-                </a>
             </div>
         </div>
     </section>
@@ -1183,13 +1380,6 @@
                     <p style="color: var(--text-secondary); line-height: 1.6;">Приоритетные поставки от Bitmain. Гарантированные сроки доставки оборудования.</p>
                 </div>
             </div>
-            
-            <div style="text-align: center; margin-bottom: 48px;">
-                <a href="#consultation" class="cta-button">
-                    <i class="fas fa-gem"></i>
-                    Получить эксклюзивные условия
-                </a>
-            </div>
         </div>
     </section>
 
@@ -1202,6 +1392,9 @@
             </div>
             <div class="products-grid">
                 <div class="product-card">
+                    <div class="urgency-badge">
+                        <i class="fas fa-info-circle"></i> Количество мест ограничено
+                    </div>
                     <h4>Тариф "Старт"</h4>
                     <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(59, 130, 246, 0.1)); padding: 12px; border-radius: 8px; margin-bottom: 16px; text-align: center;">
                         <span style="color: var(--success-color); font-weight: 600; font-size: 0.9rem;">
@@ -1245,6 +1438,9 @@
                 </div>
                 
                 <div class="product-card">
+                    <div class="urgency-badge">
+                        <i class="fas fa-info-circle"></i> Количество мест ограничено
+                    </div>
                     <h4>Тариф "Профи"</h4>
                     <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(59, 130, 246, 0.1)); padding: 12px; border-radius: 8px; margin-bottom: 16px; text-align: center;">
                         <span style="color: var(--success-color); font-weight: 600; font-size: 0.9rem;">
@@ -1339,12 +1535,6 @@
                     <p>Низкие тарифы на электроэнергию в Армении повышают рентабельность</p>
                 </div>
             </div>
-            <div style="text-align: center; margin-top: 48px;">
-                <a href="#consultation" class="cta-button">
-                    <i class="fas fa-info-circle"></i>
-                    Узнать подробности
-                </a>
-            </div>
         </div>
     </section>
 
@@ -1389,12 +1579,17 @@
         <div class="container">
                 <h2>Готовы получить предложение от команды ECOS?</h2>
                 <p>Получите БЕСПЛАТНУЮ консультацию и узнайте, как получить доступ к профессиональной инфраструктуре для майнинга без головной боли</p>
+                
+                <div class="spots-remaining" style="text-align: center; margin: 24px auto;">
+                    <i class="fas fa-info-circle" style="margin-right: 8px;"></i>
+                    Количество мест на ферме ограничено
+                </div>
             
             <div class="form-container">
                 <form id="consultationForm">
                     <div class="form-group">
                         <label for="name">Ваше имя *</label>
-                        <input type="text" id="name" name="name" required>
+                        <input type="text" id="name" name="name" required placeholder="Иван">
                     </div>
                     
                     <div class="form-group">
@@ -1411,30 +1606,8 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="equipment">Интересующее оборудование</label>
-                        <select id="equipment" name="equipment">
-                            <option value="">Выберите оборудование</option>
-                            <option value="s21-plus-235">Antminer S21+ 235TH/s</option>
-                            <option value="s21-pro-245">Antminer S21 Pro 245TH/s</option>
-                            <option value="xp-270">Antminer XP 270TH/s</option>
-                            <option value="consultation">Нужна консультация по выбору</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="budget">Бюджет</label>
-                        <select id="budget" name="budget">
-                            <option value="">Выберите бюджет</option>
-                            <option value="under-10k">До $10,000</option>
-                            <option value="10k-50k">$10,000 - $50,000</option>
-                            <option value="50k-100k">$50,000 - $100,000</option>
-                            <option value="over-100k">Свыше $100,000</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="questions">Вопросы или пожелания</label>
-                        <textarea id="questions" name="questions" rows="4" placeholder="Расскажите о ваших планах по майнингу..."></textarea>
+                        <label for="questions">Вопросы или комментарии (необязательно)</label>
+                        <textarea id="questions" name="questions" rows="3" placeholder="Например: интересует оборудование S21+, бюджет $50k"></textarea>
                     </div>
                     
                     <div class="form-group" style="margin-bottom: 24px;">
@@ -1790,34 +1963,15 @@
         // Telegram Bot Integration (рабочий код из working-quiz-cs-cart.html)
         async function sendToTelegram(formData) {
             try {
-                // Маппинг значений оборудования
-                const equipmentMap = {
-                    's21-plus-235': 'Antminer S21+ 235TH/s',
-                    's21-pro-245': 'Antminer S21 Pro 245TH/s',
-                    'xp-270': 'Antminer XP 270TH/s',
-                    'consultation': 'Нужна консультация по выбору',
-                };
-
-                // Маппинг значений бюджета
-                const budgetMap = {
-                    'under-10k': 'До $10,000',
-                    '10k-25k': '$10,000 - $25,000',
-                    '25k-50k': '$25,000 - $50,000',
-                    '50k-100k': '$50,000 - $100,000',
-                    'over-100k': 'Свыше $100,000'
-                };
-
                 // Формируем сообщение для Telegram
                 const message = `🎯 <b>НОВАЯ ЗАЯВКА С САЙТА ECOS</b>
 
 👤 <b>КЛИЕНТ:</b>
 • Имя: ${formData.name}
 • Телефон: ${formData.phone}
-• Бюджет: ${budgetMap[formData.budget] || 'Не указан'}
-• Оборудование: ${equipmentMap[formData.equipment] || 'Не указано'}
 
-💬 <b>СООБЩЕНИЕ:</b>
-${formData.questions || 'Нет дополнительных вопросов'}
+💬 <b>КОММЕНТАРИЙ:</b>
+${formData.questions || 'Без комментариев'}
 
 📊 <b>ДЕТАЛИ:</b>
 • Согласие на обработку данных: ✅ Да
@@ -2030,34 +2184,15 @@ ${formData.questions || 'Нет дополнительных вопросов'}
             try {
                 const marketingData = getMarketingData();
                 
-                // Маппинг значений оборудования
-                const equipmentMap = {
-                    's21-plus-235': 'Antminer S21+ 235TH/s',
-                    's21-pro-245': 'Antminer S21 Pro 245TH/s',
-                    'xp-270': 'Antminer XP 270TH/s',
-                    'consultation': 'Нужна консультация по выбору',
-                };
-
-                // Маппинг значений бюджета
-                const budgetMap = {
-                    'under-10k': 'До $10,000',
-                    '10k-25k': '$10,000 - $25,000',
-                    '25k-50k': '$25,000 - $50,000',
-                    '50k-100k': '$50,000 - $100,000',
-                    'over-100k': 'Свыше $100,000'
-                };
-
-                // Формируем расширенное сообщение для Telegram
+                // Формируем сообщение для Telegram
                 const message = `🎯 <b>НОВАЯ ЗАЯВКА С САЙТА ECOS</b>
 
 👤 <b>КЛИЕНТ:</b>
 • Имя: ${formData.name}
 • Телефон: ${formData.phone}
-• Бюджет: ${budgetMap[formData.budget] || 'Не указан'}
-• Оборудование: ${equipmentMap[formData.equipment] || 'Не указано'}
 
-💬 <b>СООБЩЕНИЕ:</b>
-${formData.questions || 'Нет дополнительных вопросов'}
+💬 <b>КОММЕНТАРИЙ:</b>
+${formData.questions || 'Без комментариев'}
 
 📊 <b>МАРКЕТИНГОВЫЕ ДАННЫЕ:</b>
 • Источник: ${marketingData.traffic_source}
@@ -2243,8 +2378,6 @@ ${formData.questions || 'Нет дополнительных вопросов'}
                 sendYandexEvent('form_submit', {
                     form_name: 'consultation_form',
                     client_name: data.name,
-                    client_budget: data.budget,
-                    client_equipment: data.equipment,
                     has_questions: data.questions ? 'yes' : 'no'
                 });
                 
@@ -2271,8 +2404,57 @@ ${formData.questions || 'Нет дополнительных вопросов'}
             }
         }
 
+        // Mobile Menu Functions
+        function openMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const overlay = document.getElementById('mobileMenuOverlay');
+            menu.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const overlay = document.getElementById('mobileMenuOverlay');
+            menu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
         // Add interactive elements
         document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Menu Event Listeners
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenuClose = document.getElementById('mobileMenuClose');
+            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+            const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', openMobileMenu);
+            }
+
+            if (mobileMenuClose) {
+                mobileMenuClose.addEventListener('click', closeMobileMenu);
+            }
+
+            if (mobileMenuOverlay) {
+                mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+            }
+
+            // Close menu when clicking on a link
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    closeMobileMenu();
+                });
+            });
+
+            // Close menu on Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeMobileMenu();
+                }
+            });
+
             // Отправляем событие просмотра страницы
             sendYandexEvent('page_view', {
                 page_title: document.title,
