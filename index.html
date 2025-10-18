@@ -2411,6 +2411,11 @@ ${formData.questions || 'Без комментариев'}
             menu.classList.add('active');
             overlay.classList.add('active');
             document.body.style.overflow = 'hidden';
+            
+            // Track mobile menu open
+            if (typeof sendYandexEvent !== 'undefined') {
+                sendYandexEvent('mobile_menu_open');
+            }
         }
 
         function closeMobileMenu() {
@@ -2561,6 +2566,29 @@ ${formData.questions || 'Без комментариев'}
                 
                 observer.observe(consultationSection);
             }
+
+            // Scroll Depth Tracking
+            let scrollDepths = { 25: false, 50: false, 75: false, 100: false };
+            window.addEventListener('scroll', function() {
+                const windowHeight = window.innerHeight;
+                const documentHeight = document.documentElement.scrollHeight;
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const scrollPercent = (scrollTop / (documentHeight - windowHeight)) * 100;
+
+                if (scrollPercent >= 25 && !scrollDepths[25]) {
+                    scrollDepths[25] = true;
+                    sendYandexEvent('scroll_depth', { depth: 25 });
+                } else if (scrollPercent >= 50 && !scrollDepths[50]) {
+                    scrollDepths[50] = true;
+                    sendYandexEvent('scroll_depth', { depth: 50 });
+                } else if (scrollPercent >= 75 && !scrollDepths[75]) {
+                    scrollDepths[75] = true;
+                    sendYandexEvent('scroll_depth', { depth: 75 });
+                } else if (scrollPercent >= 100 && !scrollDepths[100]) {
+                    scrollDepths[100] = true;
+                    sendYandexEvent('scroll_depth', { depth: 100 });
+                }
+            });
 
             // Animate numbers on scroll
             const observerOptions = {
