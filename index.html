@@ -2505,6 +2505,74 @@ ${formData.questions || 'Без комментариев'}
             }
         }
 
+        // Send WhatsApp click notification to Telegram
+        async function sendWhatsAppClickToTelegram() {
+            try {
+                const marketingData = getMarketingData();
+                
+                // Формируем сообщение для Telegram
+                const message = `💚 <b>КЛИК ПО WHATSAPP КНОПКЕ</b>
+
+📱 <b>ДЕЙСТВИЕ:</b>
+• Кнопка: WhatsApp Sticky Button
+• Номер: +374 77 096 452
+• Время клика: ${new Date().toLocaleString('ru-RU')}
+
+📊 <b>МАРКЕТИНГОВЫЕ ДАННЫЕ:</b>
+• Источник трафика: ${marketingData.traffic_source}
+• UTM Source: ${marketingData.utm_source}
+• UTM Medium: ${marketingData.utm_medium}
+• UTM Campaign: ${marketingData.utm_campaign}
+• UTM Term: ${marketingData.utm_term}
+• UTM Content: ${marketingData.utm_content}
+
+🖥️ <b>ТЕХНИЧЕСКИЕ ДАННЫЕ:</b>
+• Устройство: ${marketingData.device_type}
+• Браузер: ${marketingData.browser}
+• ОС: ${marketingData.os}
+• Разрешение: ${marketingData.screen_resolution}
+• Язык: ${marketingData.language}
+
+🌐 <b>ДЕТАЛИ:</b>
+• Referrer: ${marketingData.referrer}
+• Landing Page: ${marketingData.landing_page}
+
+💡 <b>РЕКОМЕНДАЦИЯ:</b>
+Пользователь предпочитает WhatsApp - напишите ему первым для повышения конверсии!
+
+🔗 <b>ССЫЛКИ:</b>
+• Сайт: https://ecs-arm.ru
+• WhatsApp: https://wa.me/37477096452`;
+
+                // Отправляем в Telegram
+                fetch(`https://api.telegram.org/bot${CONFIG.TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: CONFIG.TELEGRAM_CHAT_ID,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.ok) {
+                        console.log('✅ Уведомление о клике WhatsApp отправлено в Telegram', result);
+                    } else {
+                        console.error('❌ Ошибка отправки в Telegram:', result.description);
+                    }
+                })
+                .catch(error => {
+                    console.error('❌ Ошибка при отправке в Telegram:', error);
+                });
+
+            } catch (error) {
+                console.error('❌ Ошибка при отправке уведомления WhatsApp в Telegram:', error);
+            }
+        }
+
         // Mobile Menu Functions
         function openMobileMenu() {
             const menu = document.getElementById('mobileMenu');
@@ -2617,10 +2685,14 @@ ${formData.questions || 'Без комментариев'}
             const whatsappButton = document.getElementById('whatsappButton');
             if (whatsappButton) {
                 whatsappButton.addEventListener('click', function(e) {
+                    // Send to Yandex.Metrika
                     sendYandexEvent('whatsapp_click', {
                         phone_number: '+374 77 096 452',
                         source: 'sticky_button'
                     });
+                    
+                    // Send notification to Telegram
+                    sendWhatsAppClickToTelegram();
                 });
             }
 
