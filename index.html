@@ -395,6 +395,45 @@
             display: inline-block;
         }
 
+        /* WhatsApp Tooltip */
+        .whatsapp-tooltip {
+            position: absolute;
+            bottom: 100%;
+            right: 0;
+            margin-bottom: 10px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .whatsapp-sticky:hover .whatsapp-tooltip {
+            opacity: 1;
+            visibility: visible;
+            margin-bottom: 15px;
+        }
+
+        .whatsapp-tooltip-content {
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+
+        .whatsapp-tooltip-content::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            right: 20px;
+            border: 6px solid transparent;
+            border-top-color: var(--primary-color);
+        }
+
         @keyframes whatsapp-pulse {
             0%, 100% {
                 transform: scale(1);
@@ -1334,6 +1373,15 @@
                         Посмотреть тарифы
                     </a>
                 </div>
+                
+                <div style="margin-top: 24px; font-size: 0.95rem; opacity: 0.9;">
+                    <p style="margin: 0;">
+                        💬 Или напишите в <a href="https://api.whatsapp.com/send/?phone=37477096452&text=Хочу+получить+готовое+предложение+по+майнингу+в+СЭЗ+Армении&type=phone_number&app_absent=0" 
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           style="color: #25D366; text-decoration: underline; font-weight: 600;">WhatsApp</a> - пришлем готовое предложение за 5 минут
+                    </p>
+                </div>
             </div>
         </div>
     </section>
@@ -1725,6 +1773,24 @@
                     <h4>🎁 Бонус при консультации:</h4>
                     <p>Получите персональный расчет ROI для вашей фермы + эксклюзивные цены на оборудование Bitmain</p>
                 </div>
+                
+                <div style="text-align: center; margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(15, 23, 42, 0.1);">
+                    <p style="color: var(--text-secondary); margin-bottom: 12px; font-size: 0.95rem;">
+                        💬 Или получите готовое предложение в WhatsApp
+                    </p>
+                    <a href="https://api.whatsapp.com/send/?phone=37477096452&text=Хочу+получить+готовое+предложение+по+майнингу+в+СЭЗ+Армении&type=phone_number&app_absent=0" 
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       style="display: inline-flex; align-items: center; gap: 8px; background: #25D366; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s ease;"
+                       onmouseover="this.style.background='#20BA5A'; this.style.transform='translateY(-2px)'"
+                       onmouseout="this.style.background='#25D366'; this.style.transform='translateY(0)'">
+                        <i class="fab fa-whatsapp" style="font-size: 20px;"></i>
+                        Пришлите предложение в WhatsApp
+                    </a>
+                    <p style="color: var(--text-secondary); margin-top: 8px; font-size: 0.85rem;">
+                        ⚡ Ответим за 5 минут с готовым коммерческим предложением
+                    </p>
+                </div>
             </div>
         </div>
     </section>
@@ -1771,12 +1837,18 @@
            class="whatsapp-button" 
            target="_blank" 
            rel="noopener noreferrer"
-           id="whatsappButton">
+           id="whatsappButton"
+           title="Напишите в WhatsApp - пришлем персональное предложение за 5 минут!">
             <span class="whatsapp-icon">
                 <i class="fab fa-whatsapp"></i>
             </span>
-            <span class="whatsapp-text">Написать в WhatsApp</span>
+            <span class="whatsapp-text">Получить предложение в WhatsApp</span>
         </a>
+        <div class="whatsapp-tooltip">
+            <div class="whatsapp-tooltip-content">
+                💚 Пришлем готовое предложение за 5 минут
+            </div>
+        </div>
     </div>
 
     <!-- Модальные окна для правовых документов -->
